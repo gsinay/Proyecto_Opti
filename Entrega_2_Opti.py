@@ -1,6 +1,7 @@
 from gurobipy import Model, GRB, quicksum
 
 #Conjuntos
+T = range(53) #Semanas del año
 
 #Variables
 
