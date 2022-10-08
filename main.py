@@ -1,4 +1,3 @@
-from dbm import _ValueType
 from gurobipy import Model, GRB, quicksum
 
 #Conjuntos
