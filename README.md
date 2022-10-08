@@ -5,3 +5,5 @@ COSAS POR HACER:
 - definir los valores de los parametros que no estan en el excel
 - para los parametros que son bidimensionales (como el costo), crear dicionarios que los modelen y despues guardar el parametro en una variable de python
 - poner las restricciones (Y junto con esto, terminar de arreglar las restricciones dependiendo lo que puso el francisco en el feedback)
+ 
+ :) eso bai
