@@ -3,17 +3,23 @@ from gurobipy import Model, GRB, quicksum
 #Conjuntos
 T = range(53) #Semanas del año 
 Tr = ["HRW","SRW"] #Tipos de trigo, 1= HRW, 2=SRW
-# S = ACA HAY QUE RELLENAR DEPENDIENDO DE LOS DATOS!!!
+S = ["Chile", "Estados Unidos", "Argentina"]
 
 ##Generacion del modelo:
 model = Model()
 
-#Variables
-x = model.addVars(S,T,Tr, vtype = GRB.BINARY, name = "x_stTr") # cantidad de trigo tipo Tr a comprar del paıs s en la semana t.
-y = model.addVars(S,T,Tr, vtype = GRB.BINARY, name="y_stTR") #cantidad de trigo a almacenar del paıs s en la semana t para la semana t+1
-J = model.affVars(S,T,Tr, vtype = GRB.BINARY, name="j_stTr") #cantidad de trigo Tr almacenado del paıs s a utilizar en la semana t.
+#Variables de decisión 
+x = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name = "x_stTr") # cantidad de trigo tipo Tr a comprar del paıs s en la semana t.
+y = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="y_stTR") #cantidad de trigo a almacenar del paıs s en la semana t para la semana t+1
+j = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="j_stTr") #cantidad de trigo Tr almacenado del paıs s a utilizar en la semana t.
 
-#Parámetros (algunos hay que leer de la instancia de datos y hacerlos una lista que correspondan a los indices de sus conjuntos, otros son numeros)
+#ARMANDO LOS Parámetros
+Precios = [[365, 384], [348,999999999]]
+Precios = {"USA" : {"HRW" : 365, "SRW" : 384}, "ARG" : {"HRW" : 348, "SRW" : 9999999999}}
+c = {{s, trigo} : Precios[S][Tr] for s in S for trigo in Tr}    
+
+
+
 
 #Por acá hay que poner el time limit, no me acuerdo como era
 
@@ -21,6 +27,6 @@ J = model.affVars(S,T,Tr, vtype = GRB.BINARY, name="j_stTr") #cantidad de trigo 
 model.update()
 
 
-#R2-R16: restricciones de enunciado
+#Restricciones
 
 #Función Objetivo
