@@ -3,10 +3,11 @@ from gurobipy import Model, GRB, quicksum
 #Conjuntos
 T = range(53) #Semanas del año 
 Tr = ["HRW","SRW"] #Tipos de trigo, 1= HRW, 2=SRW
-S = ["Chile", "Estados Unidos", "Argentina"]
+S = ["Chile", "USA", "Argentina", "Canada"]
 
 ##Generacion del modelo:
 model = Model()
+model.setParam("TimeLimit", 1800) #30 Minutos TimeLimit
 
 #Variables de decisión 
 x = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name = "x_stTr") # cantidad de trigo tipo Tr a comprar del paıs s en la semana t.
@@ -15,8 +16,13 @@ j = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="j_stTr") #cantidad de trigo
 
 #ARMANDO LOS Parámetros
 
-Precios = {"USA" : {"HRW" : 365, "SRW" : 384}, "ARG" : {"HRW" : 348, "SRW" : 9999999999}}
-c = {{s, trigo} : Precios[S][Tr] for s in S for trigo in Tr}    
+
+#Parámetro costo
+#Precios = {"USA" : {"HRW" : 365, "SRW" : 384}, "ARG" : {"HRW" : 348, "SRW" : 9999999999}} ESTO NO FUNCIONA AAAAAAAAAHHHHHHHHHHHHHH
+#c = {{s, trigo} : Precios["USA"]["HRW"] for s in S for trigo in Tr}    
+
+#parametros fijos
+
 
 
 
@@ -30,3 +36,5 @@ model.update()
 #Restricciones
 
 #Función Objetivo
+ #objetivo = quicksum((x[s,t,tr] * (c[s,tr] + w )) + y[s,t]*a[t] for t in T for s in S for tr in Tr) 
+ # A esto le falta el parametro a[t] y el parametro w, pero es la misma estructura
