@@ -38,6 +38,7 @@ for i in semana:
                     c[(int(i), pais, trigo)] = ArgHRW[i-1]
                 else:
                      c[(int(i), pais, trigo)] = ArgSRW[i-1]
+            else:
                 if trigo == "HRW":
                     c[(int(i), pais, trigo)] = CanadaHRW[i-1]
                 else:
@@ -52,6 +53,7 @@ for i in semana:
             d[(int(i), trigo)] = random.randrange(41000, 51000)*(proporcion/10) #ocupamos estos valores por una tolerancia de 10% en el promedio de demanda anual por semana.
         else:
              d[(int(i), trigo)] = random.randrange(41000, 51000)*(1-(proporcion/10))
+
 
 
 
