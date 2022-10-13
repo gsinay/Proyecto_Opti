@@ -14,12 +14,13 @@ x = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name = "x_stTr") # cantidad de tr
 y = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="y_stTR") #cantidad de trigo a almacenar del paıs s en la semana t para la semana t+1
 j = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="j_stTr") #cantidad de trigo Tr almacenado del paıs s a utilizar en la semana t.
 
-#ARMANDO LOS Parámetros
+#Armando los Parámetros
+
+
 
 
 #Parámetro costo
-#Precios = {"USA" : {"HRW" : 365, "SRW" : 384}, "ARG" : {"HRW" : 348, "SRW" : 9999999999}} ESTO NO FUNCIONA AAAAAAAAAHHHHHHHHHHHHHH
-#c = {{s, trigo} : Precios["USA"]["HRW"] for s in S for trigo in Tr}    
+
 
 #parametros fijos
 
