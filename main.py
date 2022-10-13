@@ -17,17 +17,10 @@ y = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="y_stTR") #cantidad de trigo
 j = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="j_stTr") #cantidad de trigo Tr almacenado del paıs s a utilizar en la semana t.
 
 #Parámetros fijos
-
-
-
-
-#Parámetro costo
-
-
-#parametros fijos
-
-
-
+a = 4.5/6/4 #precio de almacenaje por semana
+vmax = 2182547 #almacenaje maximo en metros cubicos
+v = 1/800 #m^3 ocupados por kilogaramo de trigo
+r = 24 #24 semanas = 6 meses, vida util del trigo
 
 
 #Por acá hay que poner el time limit, no me acuerdo como era

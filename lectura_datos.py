@@ -19,7 +19,7 @@ CanadaSRW = list(s["Canada SRW"])
 ChileHRW = list(s["Chile HRW"])
 ChileSRW = list(s["Chile SRW"])
 
-c = dict() #precio de trigo de cada pais y tipo por semana
+c = dict() #precio de trigo de cada pais y tipo por semana... tiena la forma c = {(1, chile, hrw) : numero, etc.}
 for i in semana:
     for trigo in Tr:
         for pais in S:
@@ -43,10 +43,18 @@ for i in semana:
                 else:
                      c[(int(i), pais, trigo)] = CanadaSRW[i-1]
             
-d = dict() # Demanda de toneladas de trigo por semana 
+d = dict() # Demanda de toneladas de trigo por semana. tiena la forma d = {(1, hrw) : numero, (1,srw) : numero, etc.}
 for i in semana:
-    d[tuple(int(i))] = random.randrange(41000, 51000) #ocupamos estos valores por una tolerancia de 10% en el promedio de demanda anual por semana.
-print(d)
+    demanda = random.randrange(41000, 51000)
+    for trigo in Tr:
+        proporcion = random.randrange(4, 7) #valor aleatorio de proporcion de demanda de hrw 
+        if trigo == "HRW":
+            d[(int(i), trigo)] = random.randrange(41000, 51000)*(proporcion/10) #ocupamos estos valores por una tolerancia de 10% en el promedio de demanda anual por semana.
+        else:
+             d[(int(i), trigo)] = random.randrange(41000, 51000)*(1-(proporcion/10))
+
+
+
 
 
 
