@@ -1,4 +1,6 @@
 from gurobipy import Model, GRB, quicksum
+import lectura_datos as datos
+
 
 #Conjuntos
 T = range(53) #Semanas del año 
@@ -14,7 +16,7 @@ x = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name = "x_stTr") # cantidad de tr
 y = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="y_stTR") #cantidad de trigo a almacenar del paıs s en la semana t para la semana t+1
 j = model.addVars(S,T,Tr, vtype = GRB.INTEGER, name="j_stTr") #cantidad de trigo Tr almacenado del paıs s a utilizar en la semana t.
 
-#Armando los Parámetros
+#Parámetros fijos
 
 
 
