@@ -7,17 +7,17 @@ Tr = ["HRW","SRW"] #Tipos de trigo, 1= HRW, 2=SRW
 S = ["Chile", "USA", "Argentina", "Canada"]
 
 filename = "CostosTrigo.xls"
-s = pd.read_excel(filename, "Ultra_Arreglado")
-print(s)
-semana = list(s["Semana"])
-ArgHRW = list(s["Argentina HRW"])
-ArgSRW = list(s["Argentina SRW"])
-USAHRW = list(s["USA HRW"])
-USASRW = list(s["USA SRW"])
-CanadaHRW = list(s["Canada HRW"])
-CanadaSRW = list(s["Canada SRW"])
-ChileHRW = list(s["Chile HRW"])
-ChileSRW = list(s["Chile SRW"])
+costos = pd.read_excel(filename, "Ultra_Arreglado")
+
+semana = list(costos["Semana"])
+ArgHRW = list(costos["Argentina HRW"])
+ArgSRW = list(costos["Argentina SRW"])
+USAHRW = list(costos["USA HRW"])
+USASRW = list(costos["USA SRW"])
+CanadaHRW = list(costos["Canada HRW"])
+CanadaSRW = list(costos["Canada SRW"])
+ChileHRW = list(costos["Chile HRW"])
+ChileSRW = list(costos["Chile SRW"])
 
 c = dict() #precio de trigo de cada pais y tipo por semana... tiena la forma c = {(1, chile, hrw) : numero, etc.}
 for i in semana:
@@ -48,12 +48,25 @@ d = dict() # Demanda de toneladas de trigo por semana. tiena la forma d = {(1, h
 for i in semana:
     demanda = random.randrange(41000, 51000)
     for trigo in Tr:
-        proporcion = random.randrange(4, 7) #valor aleatorio de proporcion de demanda de hrw 
+        proporcion = random.randrange(8, 10) #valor aleatorio de proporcion de demanda de hrw  mayor a 80%
         if trigo == "HRW":
             d[(int(i), trigo)] = random.randrange(41000, 51000)*(proporcion/10) #ocupamos estos valores por una tolerancia de 10% en el promedio de demanda anual por semana.
         else:
              d[(int(i), trigo)] = random.randrange(41000, 51000)*(1-(proporcion/10))
-
+calidades = pd.read_excel(filename, "Calidades")
+calidades_lista = list(calidades["Calidades"])
+print(calidades_lista)
+q = dict()
+for i in range(len(calidades_lista)):
+    if i == 0:
+        q[("Chile")] = calidades_lista[i]
+    elif i == 1:
+        q[("USA")] = calidades_lista[i]
+    if i == 2:
+        q[("Argentina")] = calidades_lista[i]
+    else:
+        q[("Canada")] = calidades_lista[i]
+print(q)
 
 
 
