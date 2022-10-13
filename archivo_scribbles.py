@@ -82,6 +82,8 @@ for v in j.values():
 print(totalj)
 print(totalc)
 print(totaly)
+for v in j.values():
+    print(v.varName)
 
 
 
