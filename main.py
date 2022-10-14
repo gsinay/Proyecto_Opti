@@ -2,6 +2,7 @@ from gurobipy import Model, GRB, quicksum
 import lectura_datos as datos
 import xlsxwriter
 
+#Hola :) bienvenido al main
 
 
 #Conjuntos

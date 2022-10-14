@@ -66,7 +66,7 @@ for i in range(len(calidades_lista)):
         q[("Argentina")] = calidades_lista[i]
     else:
         q[("Canada")] = calidades_lista[i]
-print(q)
+
 
 
 

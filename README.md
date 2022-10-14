@@ -24,5 +24,13 @@ Se debe ejecutar el archivo main.py, el cual creará un nuevo archivo excel llam
 
 Es imporante notar que los datos definidos en main.py se procesan en el archivo lectura_datos.py, el cual recibe los datos "sin filtrar" de el archivo SostrosTrigo.xls, especialmente de la hoja Ultra_Arreglado y Calidades. 
 
+## Integrantes:
+- Juan Pablo Aguero
+- Nicolas Añazco
+- Valentina Barra
+- Isidora Olivera
+- Trinidad Schwarzenberg
+- Gabriel Sinay
+
 
 
