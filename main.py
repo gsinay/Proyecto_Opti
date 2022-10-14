@@ -20,11 +20,11 @@ j = model.addVars(S,T,Tr, vtype = GRB.CONTINUOUS, name="j_stTr") #cantidad de tr
 
 #Parámetros fijos
 a = 4.5/6/4 #precio de almacenaje por semana
-V = 2182547 #almacenaje maximo en metros cubicos
+savemax = 2182547 #almacenaje maximo en metros cubicos
 v = 1000/800 #m^3 ocupados por tonelada de trigo
 r = 30 #30 semanas = 6 meses, vida util del trigo
-vmax = 500000 #cantidad maxima a importar
-vmin = 10000 #cantidad minima a tener almacenada
+impmax = 5261538 #cantidad maxima a importar
+savemin = 184000 #cantidad minima a tener almacenada
 calidad_min = 0.6
 
 #updatear
@@ -41,10 +41,10 @@ model.addConstrs((j[s,t,tr] >= 0 for s in S for t in T for tr in Tr), name="NatJ
 #restriccion 1 -- demanda:
 model.addConstrs((quicksum(x[s,t,tr] - y[s,t,tr] + j[s,t,tr] for s in S) == datos.d[t,tr] for t in T for tr in Tr), name="R1")
 #restriccion 2 -- volumen max de almacenaje
-model.addConstrs((quicksum(y[s,t,tr] * v for s in S) <= V for t in T for tr in Tr), name="R2")
+model.addConstrs((quicksum(y[s,t,tr] * v for s in S) <= savemax for t in T for tr in Tr), name="R2")
 #restriccion 3 -- cantidad maxima de importacion
-model.addConstrs((quicksum((x[s,t-1,tr] * v) +  (y[s,t-1,tr] * v) +  (j[s,t,tr] * v) for tr in Tr for s in S) - quicksum(datos.d[t,tr] for tr in Tr) <= vmax for t in range(2,53)), name ="R3") #revisar lo de los indices de t
-#restriccion 4: calidad!!!!!1
+model.addConstrs((quicksum((x[s,t-1,tr] * v) +  (y[s,t-1,tr] * v) +  (j[s,t,tr] * v) for tr in Tr for s in S) - quicksum(datos.d[t,tr] for tr in Tr) <= impmax for t in range(2,53)), name ="R3") #revisar lo de los indices de t
+#restriccion 4: calidad!
 model.addConstrs((quicksum((x[s,t-1,tr] + y[s,t-1,tr] - j[s,t,tr]) * datos.q[s] for s in S for tr in Tr ) >= calidad_min * quicksum(x[s,t-1,tr] + y[s,t-1,tr] - j[s,t,tr] for s in S for tr in Tr) for t in range(2,52)), name="R5")
 #restriccion 5 -- disponibilidad de uso de almacenaje
 model.addConstrs((j[s,t,tr] <= quicksum(y[s,t-1,tr] - j[s,t-1,tr] for t in range(2,t)) for s in S for tr in Tr for t in T), name ="R5")  #el range(2,51) es desde la semana 2 hasta la semana t-1 (51)
@@ -54,7 +54,7 @@ model.addConstrs((quicksum(y[s,t-1,tr] for s in S) == 0  for t in range(min(52, 
 # restriccion 7: razon hrw a trigo total
 model.addConstrs((quicksum(x[s,t,"HRW"] for s in ["USA", "Argentina", "Canada"]) >= 0.8 * quicksum(x[s,t,tr] for s in S for tr in Tr) for t in T), name="R7")
 #restriccion 8: minimo a almacenar
-model.addConstrs((quicksum(y[s,t,tr] - j[s,t,tr] for s in S for tr in Tr for t in range(1,x)) >= vmin for x in range(2,53)), name="R8")
+model.addConstrs((quicksum(y[s,t,tr] - j[s,t,tr] for s in S for tr in Tr for t in range(1,x)) >= savemin for x in range(2,53)), name="R8")
 #Restriccion 9: lo neto que sale de la bodega tiene que ser igual a lo que neto entra
 model.addConstr((quicksum(j[s,t,tr] for s in S for t in T for tr in Tr) <= quicksum(y[s,t,tr] for s in S for t in T for tr in Tr)))
 
@@ -92,7 +92,7 @@ for v in j.values():
 row = 1
 column = 0
 count = 0
-workbook = xlsxwriter.Workbook('RESULTADOS_FINAL.xlsx')     
+workbook = xlsxwriter.Workbook('FINAL_RESULTS.xlsx')     
 valores_x = workbook.add_worksheet("variable x")     
 
 #creando la hoja con relacion a la variable x
