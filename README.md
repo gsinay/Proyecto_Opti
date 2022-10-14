@@ -22,7 +22,7 @@ pip3 install xlsxwriter
 ## Funcionamiento
 Se debe ejecutar el archivo main.py, el cual creará un nuevo archivo excel llamado FINAL_RESULTS.xlsx. Este archivo excel es el que se utilizó como referencia para los resultados a analizar en el trabajo, y para armar los gráficos adjuntos en la entrega. 
 
-Es imporante notar que los datos definidos en main.py se procesan en el archivo lectura_datos.py, el cual recibe los datos "sin filtrar" de el archivo SostrosTrigo.xls, especialmente de la hoja Ultra_Arreglado y Calidades. 
+Es imporante notar que los datos definidos en main.py se procesan en el archivo lectura_datos.py, el cual recibe los datos "sin filtrar" de el archivo CostosTrigo.xls, especialmente de la hoja Ultra_Arreglado y Calidades. 
 
 ## Integrantes:
 - Juan Pablo Aguero
