@@ -59,7 +59,7 @@ model.addConstrs((quicksum(y[s,t,tr] - j[s,t,tr] for s in S for tr in Tr for t i
 #Restriccion 9: lo neto que sale de la bodega tiene que ser igual a lo que neto entra
 model.addConstr((quicksum(j[s,t,tr] for s in S for t in T for tr in Tr) <= quicksum(y[s,t,tr] for s in S for t in T for tr in Tr)))
 
-#Restriccion 9: Balance j y x
+#Restriccion 10: Balance j y x
 model.addConstrs((quicksum(j[s,t,tr] for t in T) <= quicksum(x[s,t,tr] for t in T )  for s in S for tr in Tr), name="auxiliar")
 
 

@@ -71,6 +71,3 @@ for i in range(len(calidades_lista)):
 
 
 
-
-
-
