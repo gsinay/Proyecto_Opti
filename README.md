@@ -7,6 +7,7 @@ Para descargar todo el código, se recomienda clonar el repositorio, para esto u
 
 git clone https://github.com/gsinay/Proyecto_Opti
 
+
 ## Librerias a utilizar.
 Para el trabajo se utilizaron las librerias Pandas y xlsxwriter. Si bien xlsxwriter no estaba estpiulada como una libreria permitida en el enunciado, esta se utilizó para armar el archivo de los datos final luego de pasar por la interfaz Gurobi De no tenerlas instaladas, en un terminal nuevo deben correr el siguiente código: 
 ```
@@ -20,6 +21,11 @@ pip3 install xlsxwriter
 ```
 
 ## Funcionamiento
+Se debe estar en el directorio Proyecto_Opti. Para hacer esto ejecutar: 
+```
+cd Proyecto_Opti
+```
+
 Se debe ejecutar el archivo main.py, el cual creará un nuevo archivo excel llamado FINAL_RESULTS.xlsx. Este archivo excel es el que se utilizó como referencia para los resultados a analizar en el trabajo, y para armar los gráficos adjuntos en la entrega. 
 
 Es imporante notar que los datos definidos en main.py se procesan en el archivo lectura_datos.py, el cual recibe los datos "sin filtrar" de el archivo CostosTrigo.xls, especialmente de la hoja Ultra_Arreglado y Calidades. 
