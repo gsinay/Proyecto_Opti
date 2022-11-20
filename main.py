@@ -21,10 +21,10 @@ j = model.addVars(S,T,Tr, vtype = GRB.CONTINUOUS, name="j_stTr") #cantidad de tr
 
 #Parámetros fijos
 a = 4.5/6/4 #precio de almacenaje por semana
-savemax = 2182547 #almacenaje maximo en metros cubicos
+savemax = 2182547 #almacenaje maximo en metros cubicos 
 v = 1000/800 #m^3 ocupados por tonelada de trigo
 r = 30 #30 semanas = 6 meses, vida util del trigo
-impmax = 5261538 #cantidad maxima a importar
+impmax = 5261538#cantidad maxima a importar  
 savemin = 184000 #cantidad minima a tener almacenada
 calidad_min = 0.6
 
@@ -44,7 +44,7 @@ model.addConstrs((quicksum(x[s,t,tr] - y[s,t,tr] + j[s,t,tr] for s in S) == dato
 #restriccion 2 -- volumen max de almacenaje
 model.addConstrs((quicksum(y[s,t,tr] * v for s in S) <= savemax for t in T for tr in Tr), name="R2")
 #restriccion 3 -- cantidad maxima de importacion
-model.addConstrs((quicksum((x[s,t-1,tr] * v) +  (y[s,t-1,tr] * v) +  (j[s,t,tr] * v) for tr in Tr for s in S) - quicksum(datos.d[t,tr] for tr in Tr) <= impmax for t in range(2,53)), name ="R3") #revisar lo de los indices de t
+model.addConstrs((quicksum((x[s,t-1,tr] * v) +  (y[s,t-1,tr] * v) -  (j[s,t,tr] * v) for tr in Tr for s in S) - quicksum(datos.d[t,tr] for tr in Tr) <= impmax for t in range(2,53)), name ="R3") #revisar lo de los indices de t
 #restriccion 4: calidad!
 model.addConstrs((quicksum((x[s,t-1,tr] + y[s,t-1,tr] - j[s,t,tr]) * datos.q[s] for s in S for tr in Tr ) >= calidad_min * quicksum(x[s,t-1,tr] + y[s,t-1,tr] - j[s,t,tr] for s in S for tr in Tr) for t in range(2,52)), name="R5")
 #restriccion 5 -- disponibilidad de uso de almacenaje
@@ -86,9 +86,9 @@ for v in j.values():
     print("{}: {}".format(v.varName, v.X))
     totalj += v.X
 
-########################################################
-#####Seccion para generar archivo excel#################
-########################################################
+#######################################################
+####Seccion para generar archivo excel#################
+#######################################################
 
 row = 1
 column = 0
